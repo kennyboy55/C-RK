@@ -20,20 +20,23 @@ int add(int data)
 
 	if(NULL ==  pn)
 	{
-		printf("Out of memory ...");
+		printf("Out of memory ...\n");
 	}
 	else
 	{
 		if(NULL == pHead)
 		{
 			pn->data = data;
+			pn->previous = NULL;
 			pn->next = NULL;
 			pHead = pn;
 		}
 		else
 		{
+			pHead->next = pn;
 			pn->data = data;
-			pn->next = pHead;
+			pn->previous = pHead;
+			pn->next = NULL;
 			pHead = pn;
 		}
 	}
@@ -46,10 +49,34 @@ void show()
 	struct node *p = pHead;
 	int nr = 0;
 	
-	for( ; NULL !=  p->next ; p = p->next )
+	if (NULL == pHead)
 	{
-		printf("node nr: %d heeft data [%d]\n",nr++,p->data);
+		printf("De lijst is leeg\n");
 	}
+	else
+	{
+		for (; NULL != p->previous; p = p->previous)
+		{
+			printf("node nr: %d heeft data [%d]\n", nr++, p->data);
+		}
+	}
+}
+
+void clear()
+{
+	struct node *p = pHead;
+	struct node *prev = NULL;
+
+	for (; NULL != p->previous;)
+	{
+		prev = p->previous;
+		free(p);
+		p = prev;
+	}
+
+	pHead = NULL;
+
+	printf("De gehele lijst in gecleared!\n");
 }
 
 
