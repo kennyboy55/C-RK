@@ -5,7 +5,7 @@ int main()
 {
 	int idx;	
 
-	printf("Running init...\n");
+	
 
 	init();
 
@@ -16,13 +16,11 @@ int main()
 		add(idx, '0');
 	}		
 
-	printf("Showing data...\n");
+	
 	show();
-
-	printf("Clearing data...\n");
+	
 	clear();
-
-	printf("Showing data...\n");
+	
 	show();
 
 	printf("Adding data at begin and end...\n");
@@ -38,15 +36,18 @@ int main()
 	addPos(22, 5);
 	addPos(22, 40);
 	addPos(22, -10);
-
-	printf("Showing data...\n");
+	
 	show();
 
 	printf("Length of list: %d\n", length());
 	printf("Position of 22 in list: %d\n", exists(22));
 	printf("Position of 40 in list: %d\n", exists(40));
 
-	printf("Clearing data...\n");
+	remove(1);
+	removePos(3);
+
+	show();
+
 	clear();
 
 	printf("Done\n");

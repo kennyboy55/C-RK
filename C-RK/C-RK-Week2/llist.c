@@ -8,6 +8,7 @@ static struct node *pStart = NULL;
 
 void init()
 {
+	printf("Running init...\n");
 	pEnd = NULL;
 	pStart = NULL;
 }
@@ -105,6 +106,7 @@ int addPos(int data, int positie)
 
 void show()
 {
+	printf("Showing data...\n");
 	struct node *p = pStart;
 	int nr = 0;
 	
@@ -123,6 +125,7 @@ void show()
 
 void clear()
 {
+	printf("Clearing data...\n");
 	struct node *p = pEnd;
 	struct node *prev = NULL;
 
@@ -169,5 +172,54 @@ int exists(int data)
 
 	return -1;
 }
+
+int remove(int begin)
+{
+	struct node *p = NULL;
+	if (begin == 1)
+	{
+		p = pStart->next;
+		p->previous = NULL;
+		free(pStart);
+		pStart = p;
+	}
+	else
+	{
+		p = pEnd->previous;
+		p->next = NULL;
+		free(pEnd);
+		pEnd = p;
+	}
+	return 1;
+}
+
+int removePos(int positie)
+{
+	if (positie == 0)
+	{
+		remove(1);
+	}
+	else if (positie == length())
+	{
+		remove(0);
+	}
+	else if (positie < length())
+	{
+		struct node *r = pStart; //the node you want to remove
+
+								 /*looping till you got to the positie, and save the node*/
+		for (int i = 0; i < (positie - 1); i++)
+		{
+			r = r->next;
+		}
+
+		r->previous->next = r->next;
+		r->next->previous = r->previous;
+		free(r);
+	}
+	return 1;
+}
+
+
 
 

@@ -7,6 +7,7 @@ struct node
 	struct node *next;
 	struct node *previous;
 };
+#endif
 
 void init();
 int add(int data, int begin);
@@ -15,4 +16,6 @@ void show();
 void clear();
 int length();
 int exists(int data);
-#endif
+int remove(int);
+int removePos(int);
+
