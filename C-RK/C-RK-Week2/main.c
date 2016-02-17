@@ -9,11 +9,11 @@ int main()
 
 	init();
 
-	printf("Adding data...\n");
+	printf("Adding data at end...\n");
 
 	for(idx = 0; idx < 10; idx++)
 	{
-		add(idx);
+		add(idx, '0');
 	}		
 
 	printf("Showing data...\n");
@@ -24,6 +24,26 @@ int main()
 
 	printf("Showing data...\n");
 	show();
+
+	printf("Adding data at begin and end...\n");
+
+	for (idx = 0; idx < 10; idx++)
+	{
+		if (idx % 2 == 0)
+			add(idx, 1);
+		else
+			add(idx, 0);
+	}
+
+	addPos(22, 5);
+	addPos(22, 40);
+	addPos(22, -10);
+
+	printf("Showing data...\n");
+	show();
+
+	printf("Clearing data...\n");
+	clear();
 
 	printf("Done\n");
 

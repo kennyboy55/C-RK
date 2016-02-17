@@ -3,18 +3,19 @@
 #include "llist.h"
 
 
-static struct node *pHead = NULL;
+static struct node *pEnd = NULL;
+static struct node *pStart = NULL;
 
 void init()
 {
-	pHead = NULL;
-
+	pEnd = NULL;
+	pStart = NULL;
 }
 
 /*
  * Aan de voorkant invoegen
  */
-int add(int data)
+int add(int data, int begin)
 {
 	struct node *pn = (struct node*)malloc(sizeof(struct node));
 
@@ -24,38 +25,96 @@ int add(int data)
 	}
 	else
 	{
-		if(NULL == pHead)
+		if (NULL == pStart)
 		{
 			pn->data = data;
 			pn->previous = NULL;
 			pn->next = NULL;
-			pHead = pn;
+			pStart = pn;
+			pEnd = pn;
+		}
+		else if (begin)
+		{
+			pStart->previous = pn;
+			pn->data = data;
+			pn->next = pStart;
+			pn->previous = NULL;
+			pStart = pn;
 		}
 		else
 		{
-			pHead->next = pn;
+			pEnd->next = pn;
 			pn->data = data;
-			pn->previous = pHead;
+			pn->previous = pEnd;
 			pn->next = NULL;
-			pHead = pn;
+			pEnd = pn;
 		}
 	}
 
 	return 1;	
 }
 
+int addPos(int data, int positie)
+{
+	struct node *pn = (struct node*)malloc(sizeof(struct node));
+
+	if (NULL == pn)
+	{
+		printf("Out of memory ...\n");
+	}
+	else
+	{
+		if (NULL == pStart)
+		{
+			add(data, '1');
+		}
+		else
+		{
+			if (positie < 0)
+			{
+				printf("Positie < 0 : %d ...\n", positie);
+				return 0;
+			}
+
+			int idx = 0;
+			struct node *p = pStart;
+
+			for (; NULL != p->next; p = p->next)
+			{
+				if (positie == idx)
+				{
+					pn->data = data;
+					pn->next = p;
+					pn->previous = p->previous;
+					p->previous->next = pn;
+					p->previous = pn;
+					return 1;
+				}
+
+				idx++;
+			}
+
+			printf("Positie > %d : %d ...\n", idx, positie);
+			free(pn);
+			return 0;
+		}
+	}
+
+	return 1;
+}
+
 void show()
 {
-	struct node *p = pHead;
+	struct node *p = pStart;
 	int nr = 0;
 	
-	if (NULL == pHead)
+	if (NULL == pStart)
 	{
 		printf("De lijst is leeg\n");
 	}
 	else
 	{
-		for (; NULL != p->previous; p = p->previous)
+		for (; NULL != p->next; p = p->next)
 		{
 			printf("node nr: %d heeft data [%d]\n", nr++, p->data);
 		}
@@ -64,7 +123,7 @@ void show()
 
 void clear()
 {
-	struct node *p = pHead;
+	struct node *p = pEnd;
 	struct node *prev = NULL;
 
 	for (; NULL != p->previous;)
@@ -74,7 +133,8 @@ void clear()
 		p = prev;
 	}
 
-	pHead = NULL;
+	pEnd = NULL;
+	pStart = NULL;
 
 	printf("De gehele lijst in gecleared!\n");
 }

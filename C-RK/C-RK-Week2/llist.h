@@ -9,7 +9,9 @@ struct node
 };
 
 void init();
-int add(int data);
+int add(int data, int begin);
+int addPos(int data, int positie);
 void show();
+void clear();
 
 #endif
