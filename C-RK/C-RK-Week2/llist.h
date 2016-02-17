@@ -13,5 +13,6 @@ int add(int data, int begin);
 int addPos(int data, int positie);
 void show();
 void clear();
-
+int length();
+int exists(int data);
 #endif

@@ -42,6 +42,10 @@ int main()
 	printf("Showing data...\n");
 	show();
 
+	printf("Length of list: %d\n", length());
+	printf("Position of 22 in list: %d\n", exists(22));
+	printf("Position of 40 in list: %d\n", exists(40));
+
 	printf("Clearing data...\n");
 	clear();
 

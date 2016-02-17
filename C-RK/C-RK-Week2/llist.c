@@ -139,4 +139,35 @@ void clear()
 	printf("De gehele lijst in gecleared!\n");
 }
 
+int length()
+{
+	int idx = 0;
+	struct node *p = pStart;
+
+	for (; NULL != p->next; p = p->next)
+	{		
+		idx++;
+	}
+
+	return idx;
+}
+
+int exists(int data)
+{
+	int idx = 0;
+	struct node *p = pStart;
+
+	for (; NULL != p->next; p = p->next)
+	{
+		if (p->data == data)
+		{
+			return idx;
+		}
+
+		idx++;
+	}
+
+	return -1;
+}
+
 
