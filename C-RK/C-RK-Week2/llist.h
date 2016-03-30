@@ -12,9 +12,9 @@ struct node
 void init();
 int add(int data, int begin);
 int addPos(int data, int positie);
-void show();
-void clear();
-int length();
+void show(void);
+void clear(void);
+int length(void);
 int exists(int data);
 int remove(int);
 int removePos(int);

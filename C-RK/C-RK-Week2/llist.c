@@ -116,9 +116,13 @@ void show()
 	}
 	else
 	{
-		for (; NULL != p->next; p = p->next)
+		while (1)
 		{
 			printf("node nr: %d heeft data [%d]\n", nr++, p->data);
+			if (p->next == NULL)
+				break;
+
+			p = p->next;
 		}
 	}
 }
@@ -184,7 +188,7 @@ int remove(int begin)
 		pStart = p;
 	}
 	else
-	{
+	{ 
 		p = pEnd->previous;
 		p->next = NULL;
 		free(pEnd);
@@ -195,6 +199,7 @@ int remove(int begin)
 
 int removePos(int positie)
 {
+	int i;
 	if (positie == 0)
 	{
 		remove(1);
@@ -207,8 +212,8 @@ int removePos(int positie)
 	{
 		struct node *r = pStart; //the node you want to remove
 
-								 /*looping till you got to the positie, and save the node*/
-		for (int i = 0; i < (positie - 1); i++)
+		/*looping till you got to the positie, and save the node*/
+		for (i = 0; i < (positie - 1); i++)
 		{
 			r = r->next;
 		}
