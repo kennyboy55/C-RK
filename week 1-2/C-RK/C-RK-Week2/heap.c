@@ -2,8 +2,6 @@
 wanneer de double linked list wordt aangepast*/
 
 #include "llist.h"
-#include <sys/heap.h>
-#include "log.h"
 
 void check_heap(void)
 {
