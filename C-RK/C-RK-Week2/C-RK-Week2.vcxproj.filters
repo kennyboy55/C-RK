@@ -3,10 +3,10 @@
   <ItemGroup>
     <ClCompile Include="llist.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="..\..\..\..\..\Desktop\ipac\source\heap.c" />
+    <ClCompile Include="heap.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="llist.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\ipac\include\heap.h" />
+    <ClInclude Include="heap.h" />
   </ItemGroup>
 </Project>
